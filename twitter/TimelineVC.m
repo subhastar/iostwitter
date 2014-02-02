@@ -69,6 +69,7 @@
 
     Tweet *tweet = self.tweets[indexPath.row];
     cell.textLabel.text = tweet.text;
+    NSLog(@"%@", tweet.timestamp);
     
     return cell;
 }
