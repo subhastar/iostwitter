@@ -7,6 +7,15 @@
 //
 
 #import "TweetCell.h"
+#import "UIImageView+AFNetworking.h"
+
+@interface TweetCell ()
+@property (weak, nonatomic) IBOutlet UIImageView *profilePic;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+
+@end
 
 @implementation TweetCell
 
@@ -26,4 +35,12 @@
     // Configure the view for the selected state
 }
 
+- (void) populateWithTweet:(Tweet *)tweet
+{
+    self.nameLabel.text = tweet.name;
+    self.usernameLabel.text = tweet.username;
+    self.timeLabel.text = tweet.timestamp;
+    
+    [self.profilePic setImageWithURL:tweet.profilePicUrl];
+}
 @end
