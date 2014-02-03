@@ -76,6 +76,30 @@
     return cell;
 }
 
+- (float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    float TEXT_VIEW_WIDTH = 256.0f;
+    float CELL_CONTENT_MARGIN_BOTTOM = 8.0f;
+    float CELL_CONTENT_MARGIN_TOP = 20.0f;
+    float CELL_CONTENT_MARGIN = CELL_CONTENT_MARGIN_BOTTOM + CELL_CONTENT_MARGIN_TOP;
+    float FONT_SIZE = 12.0f;
+    
+    Tweet *tweet = self.tweets[indexPath.row];
+    NSString *text = tweet.text;
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:FONT_SIZE]};
+    
+    CGSize boundingSize = CGSizeMake(TEXT_VIEW_WIDTH, 20000.0f);
+    
+    CGRect boundingRect = [text boundingRectWithSize:boundingSize options:NSStringDrawingUsesLineFragmentOrigin  attributes:attributes context:nil];
+    
+    float neededHeight = boundingRect.size.height + CELL_CONTENT_MARGIN * 2 + 10;
+    
+    float height = MAX(neededHeight, 44.0f);
+    
+    return height;
+}
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
