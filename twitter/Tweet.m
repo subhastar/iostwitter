@@ -159,7 +159,11 @@ NSLocalizedStringFromTableInBundle(key, @"NSDateTimeAgo", [NSBundle bundleWithPa
 }
 
 - (BOOL) serverFavorite {
-    return [[self.data valueOrNilForKeyPath:@"favorite"] boolValue];
+    return [[self.data valueOrNilForKeyPath:@"favorited"] boolValue];
+}
+
+- (BOOL) serverRetweet {
+    return [[self.data valueOrNilForKeyPath:@"retweeted"] boolValue];
 }
 
 + (NSMutableArray *)tweetsWithArray:(NSArray *)array {

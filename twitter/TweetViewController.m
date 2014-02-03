@@ -34,9 +34,14 @@
 @property (weak, nonatomic) IBOutlet UIImageView *profilePicView;
 @property (weak, nonatomic) IBOutlet UILabel *retweetsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *favoritesLabel;
+
 - (IBAction)tapFavorite:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
 - (void)updateFavoriteButton:(BOOL)favorite andLabel:(BOOL)updateLabel;
+
+@property (weak, nonatomic) IBOutlet UIButton *retweetButton;
+- (IBAction)tapRetweet:(id)sender;
+- (void)updateRetweetButton:(BOOL)retweet andLabel:(BOOL)updateLabel;
 
 @end
 
@@ -67,6 +72,8 @@
     [self.profilePicView setImageWithURL:self.tweet.profilePicUrl];
     
     [self updateFavoriteButton:self.tweet.serverFavorite andLabel:NO];
+    
+    [self updateRetweetButton:self.tweet.serverRetweet andLabel:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -96,6 +103,30 @@
         if (updateLabel) {
             self.favoritesLabel.text =
             [NSString decrement:self.favoritesLabel.text];
+        }
+    }
+}
+- (IBAction)tapRetweet:(id)sender {
+    [self updateRetweetButton:!self.tweet.retweet andLabel:YES];
+}
+
+- (void)updateRetweetButton:(BOOL)retweet andLabel:(BOOL)updateLabel {
+    self.tweet.retweet = retweet;
+    if (self.tweet.retweet) {
+        UIImage *image =
+        [UIImage imageNamed:@"bold_retweet.png"];
+        [self.retweetButton setBackgroundImage:image forState:UIControlStateNormal];
+        if (updateLabel) {
+            self.retweetsLabel.text =
+            [NSString increment:self.retweetsLabel.text];
+        }
+    } else {
+        UIImage *image =
+        [UIImage imageNamed:@"retweet.png"];
+        [self.retweetButton setBackgroundImage:image forState:UIControlStateNormal];
+        if (updateLabel) {
+            self.retweetsLabel.text =
+            [NSString decrement:self.retweetsLabel.text];
         }
     }
 }

@@ -11,6 +11,7 @@
                 <outlet property="favoritesLabel" destination="PVZ-hW-7Nq" id="Ak9-rm-QYU"/>
                 <outlet property="nameLabel" destination="BVW-NW-gnr" id="d0W-zr-NVX"/>
                 <outlet property="profilePicView" destination="CQV-w0-S7q" id="Crd-PV-3qW"/>
+                <outlet property="retweetButton" destination="klS-73-J3g" id="Ge7-y9-cx0"/>
                 <outlet property="retweetsLabel" destination="22p-0g-Poc" id="G5P-cy-4zg"/>
                 <outlet property="timestampLabel" destination="wAd-yA-vzH" id="2lm-vy-gDr"/>
                 <outlet property="tweetTextLabel" destination="K3e-bU-1Sd" id="F8s-Oo-25Y"/>
@@ -95,6 +96,16 @@
                         <action selector="tapFavorite:" destination="-1" eventType="touchUpInside" id="PRp-p9-86p"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="klS-73-J3g">
+                    <rect key="frame" x="137" y="375" width="46" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" backgroundImage="retweet.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="tapRetweet:" destination="-1" eventType="touchUpInside" id="8J9-Ej-tZK"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
@@ -103,5 +114,6 @@
     </objects>
     <resources>
         <image name="favorite.png" width="1200" height="1200"/>
+        <image name="retweet.png" width="1200" height="1200"/>
     </resources>
 </document>
