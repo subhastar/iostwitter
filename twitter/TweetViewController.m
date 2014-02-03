@@ -9,6 +9,23 @@
 #import "TweetViewController.h"
 #import "UIImageView+AFNetworking.h"
 
+@interface NSString (Number)
++ (NSString *) increment:(NSString *) string;
++ (NSString *) decrement:(NSString *) string;
+
+@end
+
+@implementation NSString (Number)
++ (NSString *) increment:(NSString *) string {
+    int value = [string intValue] + 1;
+    return [NSString stringWithFormat:@"%d", value];
+}
++ (NSString *) decrement:(NSString *) string {
+    int value = [string intValue] - 1;
+    return [NSString stringWithFormat:@"%d", value];
+}
+@end
+
 @interface TweetViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
@@ -19,8 +36,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *favoritesLabel;
 - (IBAction)tapFavorite:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
-
-- (void)updateFavoriteButton:(BOOL)favorite;
+- (void)updateFavoriteButton:(BOOL)favorite andLabel:(BOOL)updateLabel;
 
 @end
 
@@ -50,7 +66,7 @@
     
     [self.profilePicView setImageWithURL:self.tweet.profilePicUrl];
     
-    [self updateFavoriteButton:self.tweet.serverFavorite];
+    [self updateFavoriteButton:self.tweet.serverFavorite andLabel:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -60,19 +76,27 @@
 }
 
 - (IBAction)tapFavorite:(id)sender {
-    [self updateFavoriteButton:!self.tweet.favorite];
+    [self updateFavoriteButton:!self.tweet.favorite andLabel:YES];
 }
 
-- (void)updateFavoriteButton:(BOOL) favorite {
+- (void)updateFavoriteButton:(BOOL)favorite andLabel:(BOOL)updateLabel {
     self.tweet.favorite = favorite;
     if (self.tweet.favorite) {
         UIImage *image =
         [UIImage imageNamed:@"filled_favorite.png"];
         [self.favoriteButton setBackgroundImage:image forState:UIControlStateNormal];
+        if (updateLabel) {
+            self.favoritesLabel.text =
+            [NSString increment:self.favoritesLabel.text];
+        }
     } else {
         UIImage *image =
         [UIImage imageNamed:@"favorite.png"];
         [self.favoriteButton setBackgroundImage:image forState:UIControlStateNormal];
+        if (updateLabel) {
+            self.favoritesLabel.text =
+            [NSString decrement:self.favoritesLabel.text];
+        }
     }
 }
 @end
