@@ -12,16 +12,16 @@
 #define TWITTER_BASE_URL [NSURL URLWithString:@"https://api.twitter.com/"]
 
 // default keys:
-//#define TWITTER_CONSUMER_KEY @"biYAqubJD0rK2cRatIQTZw"
-//#define TWITTER_CONSUMER_SECRET @"2cygl2irBgMQVNuWJwMn6vXiyDnWtht7gSyuRnf0Fg"
+#define TWITTER_CONSUMER_KEY @"biYAqubJD0rK2cRatIQTZw"
+#define TWITTER_CONSUMER_SECRET @"2cygl2irBgMQVNuWJwMn6vXiyDnWtht7gSyuRnf0Fg"
 
 // Subha's demo client keys
 // #define TWITTER_CONSUMER_KEY @"gNXEwEGdoLVHcCVHvN39nQ"
 // #define TWITTER_CONSUMER_SECRET @"ApEnUIZhSxnyzKoWpgeGuWn9Gh6UaWtJk06y7nHYo"
 
 // Demo client 2 keys
- #define TWITTER_CONSUMER_KEY @"eAC7hCmtEVhM7g5J5MJU2w"
- #define TWITTER_CONSUMER_SECRET @"hpBWJyC2IDZ3koMRz3F5tt2H7um3wJf8F1cFNgjBWc"
+// #define TWITTER_CONSUMER_KEY @"eAC7hCmtEVhM7g5J5MJU2w"
+// #define TWITTER_CONSUMER_SECRET @"hpBWJyC2IDZ3koMRz3F5tt2H7um3wJf8F1cFNgjBWc"
 
 static NSString * const kAccessTokenKey = @"kAccessTokenKey";
 
@@ -64,7 +64,7 @@ static NSString * const kAccessTokenKey = @"kAccessTokenKey";
 
 #pragma mark - Statuses API
 
-- (void)homeTimelineWithCount:(int)count sinceId:(int)sinceId maxId:(int)maxId success:(void (^)(AFHTTPRequestOperation *operation, id response))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+- (void)homeTimelineWithCount:(int)count sinceId:(int)sinceId maxId:(long long)maxId success:(void (^)(AFHTTPRequestOperation *operation, id response))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{@"count": @(count)}];
     if (sinceId > 0) {
         [params setObject:@(sinceId) forKey:@"since_id"];

@@ -12,9 +12,11 @@
 @interface TimelineVC ()
 
 @property (nonatomic, strong) NSMutableArray *tweets;
+@property NSNumber *maxId;
 
 - (void)onSignOutButton;
 - (void)reload;
+- (void)reloadWithMaxId:(long long)maxId;
 
 @end
 
@@ -34,6 +36,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.tableView setDelegate:self];
+    
+    self.tweets = [[NSMutableArray alloc] init];
     
     // sign out button
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Sign Out" style:UIBarButtonItemStylePlain target:self action:@selector(onSignOutButton)];
@@ -153,7 +159,19 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
-
+          
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)aScrollView
+{
+    NSArray *visibleRows = [self.tableView visibleCells];
+    UITableViewCell *lastVisibleCell = [visibleRows lastObject];
+    NSIndexPath *path = [self.tableView indexPathForCell:lastVisibleCell];
+    if(path.row == self.tweets.count - 1)
+    {
+        long long loadId = [self.maxId longLongValue] - 1;
+        NSLog(@"RELOADING THINGS with load id %lld", loadId);
+        [self reloadWithMaxId:([self.maxId longLongValue] - 1)];
+    }
+}
 /*
 #pragma mark - Navigation
 
@@ -172,14 +190,21 @@
     [User setCurrentUser:nil];
 }
 
-- (void)reload {
-    [[TwitterClient instance] homeTimelineWithCount:20 sinceId:0 maxId:0 success:^(AFHTTPRequestOperation *operation, id response) {
+- (void) reload {
+    [self reloadWithMaxId:0];
+}
+
+- (void)reloadWithMaxId:(long long)maxId {
+    [[TwitterClient instance] homeTimelineWithCount:20 sinceId:0 maxId:maxId success:^(AFHTTPRequestOperation *operation, id response) {
         NSLog(@"%@", response);
-        self.tweets = [Tweet tweetsWithArray:response];
+        NSArray * newTweets = [Tweet tweetsWithArray:response];
+        [self.tweets addObjectsFromArray:newTweets];
+        self.maxId = [self.tweets[self.tweets.count - 1] tweetId];
+        
         [self.tableView reloadData];
         [self.refreshControl endRefreshing];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@", error);
+        NSLog(@"error. %@", error);
         // Do nothing
     }];
 }
