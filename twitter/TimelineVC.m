@@ -35,11 +35,20 @@
 {
     [super viewDidLoad];
     
+    // sign out button
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Sign Out" style:UIBarButtonItemStylePlain target:self action:@selector(onSignOutButton)];
     
+    // set up custom tweet cell
     UINib *customNib = [UINib nibWithNibName:@"TweetCell" bundle:nil];
-    
     [self.tableView registerNib:customNib forCellReuseIdentifier:@"TweetCell" ];
+    
+    // pull to refresh
+    UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
+    refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
+    
+    [refresh addTarget:self action:@selector(reload)
+      forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = refresh;
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -168,6 +177,7 @@
         NSLog(@"%@", response);
         self.tweets = [Tweet tweetsWithArray:response];
         [self.tableView reloadData];
+        [self.refreshControl endRefreshing];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         // Do nothing
     }];
