@@ -9,6 +9,7 @@
 #import "TimelineVC.h"
 #import "TweetCell.h"
 #import "TweetViewController.h"
+#import "ComposeViewController.h"
 
 @interface TimelineVC ()
 
@@ -16,6 +17,7 @@
 @property NSNumber *maxId;
 
 - (void)onSignOutButton;
+- (void)onComposeButton;
 - (void)reload;
 - (void)reloadWithMaxId:(long long)maxId;
 
@@ -44,6 +46,9 @@
     
     // sign out button
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Sign Out" style:UIBarButtonItemStylePlain target:self action:@selector(onSignOutButton)];
+    
+    // compose
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"New Tweet" style:UIBarButtonItemStylePlain target:self action:@selector(onComposeButton)];
     
     // set up custom tweet cell
     UINib *customNib = [UINib nibWithNibName:@"TweetCell" bundle:nil];
@@ -194,6 +199,13 @@
 
 - (void)onSignOutButton {
     [User setCurrentUser:nil];
+}
+
+- (void)onComposeButton {
+    ComposeViewController *composeVC = [[ComposeViewController alloc] init];
+    // set any metadata here.
+    
+    [self.navigationController pushViewController:composeVC animated:YES];
 }
 
 - (void) reload {

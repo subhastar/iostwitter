@@ -106,6 +106,16 @@
                         <action selector="tapRetweet:" destination="-1" eventType="touchUpInside" id="8J9-Ej-tZK"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ltr-v8-LGb">
+                    <rect key="frame" x="36" y="375" width="46" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" backgroundImage="reply.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="tapReply:" destination="-1" eventType="touchUpInside" id="cIH-iJ-LVA"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
@@ -114,6 +124,7 @@
     </objects>
     <resources>
         <image name="favorite.png" width="1200" height="1200"/>
+        <image name="reply.png" width="1200" height="1200"/>
         <image name="retweet.png" width="1200" height="1200"/>
     </resources>
 </document>

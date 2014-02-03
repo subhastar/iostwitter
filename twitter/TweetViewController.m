@@ -8,6 +8,7 @@
 
 #import "TweetViewController.h"
 #import "UIImageView+AFNetworking.h"
+#import "ComposeViewController.h"
 
 @interface NSString (Number)
 + (NSString *) increment:(NSString *) string;
@@ -42,6 +43,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *retweetButton;
 - (IBAction)tapRetweet:(id)sender;
 - (void)updateRetweetButton:(BOOL)retweet andLabel:(BOOL)updateLabel;
+- (IBAction)tapReply:(id)sender;
 
 @end
 
@@ -129,5 +131,12 @@
             [NSString decrement:self.retweetsLabel.text];
         }
     }
+}
+
+- (IBAction)tapReply:(id)sender {
+    ComposeViewController *composeVC = [[ComposeViewController alloc] init];
+    composeVC.replyText = self.tweet.username;
+    
+    [self.navigationController pushViewController:composeVC animated:YES];
 }
 @end
