@@ -88,6 +88,12 @@
 
 - (IBAction)tapFavorite:(id)sender {
     [self updateFavoriteButton:!self.tweet.favorite andLabel:YES];
+    
+    if (self.tweet.favorite) {
+        [[TwitterClient instance] createFavorite:[self.tweet tweetId]];
+    } else {
+        [[TwitterClient instance] destroyFavorite:[self.tweet tweetId]];
+    }
 }
 
 - (void)updateFavoriteButton:(BOOL)favorite andLabel:(BOOL)updateLabel {

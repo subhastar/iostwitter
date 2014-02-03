@@ -28,4 +28,8 @@
 
 - (void)deleteTweet:(NSNumber *)tweetId;
 
+- (void)createFavorite:(NSNumber *)tweetId;
+
+- (void)destroyFavorite:(NSNumber *)tweetId;
+
 @end
