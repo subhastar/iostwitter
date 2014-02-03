@@ -18,6 +18,8 @@
 @property (nonatomic, strong, readonly) NSNumber *tweetId;
 @property (nonatomic, strong, readonly) NSNumber *favoriteCount;
 @property (nonatomic, strong, readonly) NSNumber *retweetCount;
+@property (nonatomic, readonly) BOOL serverFavorite;
+@property (nonatomic) BOOL favorite;
 
 + (NSMutableArray *)tweetsWithArray:(NSArray *)array;
 

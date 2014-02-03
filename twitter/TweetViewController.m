@@ -17,6 +17,10 @@
 @property (weak, nonatomic) IBOutlet UIImageView *profilePicView;
 @property (weak, nonatomic) IBOutlet UILabel *retweetsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *favoritesLabel;
+- (IBAction)tapFavorite:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
+
+- (void)updateFavoriteButton:(BOOL)favorite;
 
 @end
 
@@ -45,6 +49,8 @@
     self.favoritesLabel.text = [NSString stringWithFormat:@"%@", self.tweet.favoriteCount];
     
     [self.profilePicView setImageWithURL:self.tweet.profilePicUrl];
+    
+    [self updateFavoriteButton:self.tweet.serverFavorite];
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,4 +59,20 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)tapFavorite:(id)sender {
+    [self updateFavoriteButton:!self.tweet.favorite];
+}
+
+- (void)updateFavoriteButton:(BOOL) favorite {
+    self.tweet.favorite = favorite;
+    if (self.tweet.favorite) {
+        UIImage *image =
+        [UIImage imageNamed:@"filled_favorite.png"];
+        [self.favoriteButton setBackgroundImage:image forState:UIControlStateNormal];
+    } else {
+        UIImage *image =
+        [UIImage imageNamed:@"favorite.png"];
+        [self.favoriteButton setBackgroundImage:image forState:UIControlStateNormal];
+    }
+}
 @end
