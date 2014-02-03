@@ -15,6 +15,7 @@
 
 @property (nonatomic, strong) NSMutableArray *tweets;
 @property NSNumber *maxId;
+@property NSNumber *sinceId;
 
 - (void)onSignOutButton;
 - (void)onComposeButton;
@@ -58,7 +59,7 @@
     UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
     refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
     
-    [refresh addTarget:self action:@selector(reload)
+    [refresh addTarget:self action:@selector(pullToRefresh)
       forControlEvents:UIControlEventValueChanged];
     self.refreshControl = refresh;
 
@@ -215,17 +216,29 @@
     [self.navigationController pushViewController:composeVC animated:YES];
 }
 
-- (void) reload {
-    [self reloadWithMaxId:0];
+- (void) pullToRefresh {
+    [self reloadWithSinceId:[self.sinceId longLongValue]MaxId:0];
 }
 
-- (void)reloadWithMaxId:(long long)maxId {
-    [[TwitterClient instance] homeTimelineWithCount:20 sinceId:0 maxId:maxId success:^(AFHTTPRequestOperation *operation, id response) {
+- (void) reload {
+    [self reloadWithSinceId:0 MaxId:0];
+}
+
+- (void)reloadWithSinceId:(long long) sinceId MaxId:(long long)maxId {
+    [[TwitterClient instance] homeTimelineWithCount:20 sinceId:sinceId maxId:maxId success:^(AFHTTPRequestOperation *operation, id response) {
         //NSLog(@"%@", response);
         NSArray * newTweets = [Tweet tweetsWithArray:response];
-        [self.tweets addObjectsFromArray:newTweets];
+        if (sinceId == 0) {
+            [self.tweets addObjectsFromArray:newTweets];
+        } else {
+            int index = 0;
+            for (Tweet *newTweet in newTweets) {
+                [self.tweets insertObject:newTweet atIndex:index];
+                index++;
+            }
+        }
+        self.sinceId = [self.tweets[0] tweetId];
         self.maxId = [self.tweets[self.tweets.count - 1] tweetId];
-        
         [self.tableView reloadData];
         [self.refreshControl endRefreshing];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

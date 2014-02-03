@@ -12,12 +12,12 @@
 #define TWITTER_BASE_URL [NSURL URLWithString:@"https://api.twitter.com/"]
 
 // default keys:
-#define TWITTER_CONSUMER_KEY @"biYAqubJD0rK2cRatIQTZw"
-#define TWITTER_CONSUMER_SECRET @"2cygl2irBgMQVNuWJwMn6vXiyDnWtht7gSyuRnf0Fg"
+// #define TWITTER_CONSUMER_KEY @"biYAqubJD0rK2cRatIQTZw"
+// #define TWITTER_CONSUMER_SECRET @"2cygl2irBgMQVNuWJwMn6vXiyDnWtht7gSyuRnf0Fg"
 
 // Subha's demo client keys
-// #define TWITTER_CONSUMER_KEY @"gNXEwEGdoLVHcCVHvN39nQ"
-// #define TWITTER_CONSUMER_SECRET @"ApEnUIZhSxnyzKoWpgeGuWn9Gh6UaWtJk06y7nHYo"
+#define TWITTER_CONSUMER_KEY @"gNXEwEGdoLVHcCVHvN39nQ"
+#define TWITTER_CONSUMER_SECRET @"ApEnUIZhSxnyzKoWpgeGuWn9Gh6UaWtJk06y7nHYo"
 
 // Demo client 2 keys
 // #define TWITTER_CONSUMER_KEY @"eAC7hCmtEVhM7g5J5MJU2w"
