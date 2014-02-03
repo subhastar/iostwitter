@@ -97,6 +97,7 @@
 		D52009F0189F66F80014D30E /* ComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposeViewController.m; sourceTree = "<group>"; };
 		D52009F1189F66F80014D30E /* ComposeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ComposeViewController.xib; sourceTree = "<group>"; };
 		D52009F4189F69080014D30E /* reply.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reply.png; sourceTree = "<group>"; };
+		D52009F6189F742E0014D30E /* TweetPostDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetPostDelegate.h; sourceTree = "<group>"; };
 		D53898C7189F47F300B1D0EF /* TweetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetViewController.h; sourceTree = "<group>"; };
 		D53898C8189F47F300B1D0EF /* TweetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetViewController.m; sourceTree = "<group>"; };
 		D53898C9189F47F300B1D0EF /* TweetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TweetViewController.xib; sourceTree = "<group>"; };
@@ -224,6 +225,7 @@
 				D52009EF189F66F80014D30E /* ComposeViewController.h */,
 				D52009F0189F66F80014D30E /* ComposeViewController.m */,
 				D52009F1189F66F80014D30E /* ComposeViewController.xib */,
+				D52009F6189F742E0014D30E /* TweetPostDelegate.h */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";

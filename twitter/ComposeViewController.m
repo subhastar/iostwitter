@@ -7,6 +7,7 @@
 //
 
 #import "ComposeViewController.h"
+#import "TweetPostDelegate.h"
 
 @interface ComposeViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *tweetTextView;
@@ -42,6 +43,12 @@
 }
 
 - (IBAction)tweet:(id)sender {
-    [[TwitterClient instance] postTweet:self.tweetTextView.text];
+    __weak id<TweetPostDelegate> weakDelegate = self.delegate;
+    [[TwitterClient instance] postTweet:self.tweetTextView.text success:^ (id responseObject) {
+        Tweet *tweet = [[Tweet alloc] initWithDictionary:responseObject];
+        [weakDelegate postedTweet:tweet];
+    }];
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 @end

@@ -75,15 +75,14 @@ static NSString * const kAccessTokenKey = @"kAccessTokenKey";
     [self getPath:@"1.1/statuses/home_timeline.json" parameters:params success:success failure:failure];
 }
 
-- (void) postTweet:(NSString *)tweet
+- (void) postTweet:(NSString *)tweet success:(void(^)(id responseObject))successHandler
 {
     NSMutableDictionary *params = [NSMutableDictionary
                                    dictionary];
     [params setObject:tweet forKey:@"status"];
     
     [self postPath:@"1.1/statuses/update.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"tweet success!");
-        NSLog(@"%@", responseObject);
+        successHandler(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"tweet failure.");
     }];

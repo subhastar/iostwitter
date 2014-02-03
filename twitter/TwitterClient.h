@@ -22,6 +22,6 @@
 
 - (void)homeTimelineWithCount:(int)count sinceId:(int)sinceId maxId:(long long)maxId success:(void (^)(AFHTTPRequestOperation *operation, id response))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
-- (void)postTweet:(NSString *)tweet;
+- (void)postTweet:(NSString *)tweet success:(void (^)(id responseObject)) successHandler;
 
 @end

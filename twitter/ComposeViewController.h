@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TweetPostDelegate.h"
 
 @interface ComposeViewController : UIViewController
 @property (nonatomic, strong) NSString *replyText;
+@property id<TweetPostDelegate> delegate;
 @end

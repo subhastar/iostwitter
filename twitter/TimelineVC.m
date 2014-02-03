@@ -195,6 +195,13 @@
 
  */
 
+#pragma mark - Tweet Post Delegate
+- (void) postedTweet:(Tweet *)tweet
+{
+    [self.tweets insertObject:tweet atIndex:0];
+    [self.tableView reloadData];
+}
+
 #pragma mark - Private methods
 
 - (void)onSignOutButton {
@@ -203,7 +210,7 @@
 
 - (void)onComposeButton {
     ComposeViewController *composeVC = [[ComposeViewController alloc] init];
-    // set any metadata here.
+    composeVC.delegate = self;
     
     [self.navigationController pushViewController:composeVC animated:YES];
 }
@@ -214,7 +221,7 @@
 
 - (void)reloadWithMaxId:(long long)maxId {
     [[TwitterClient instance] homeTimelineWithCount:20 sinceId:0 maxId:maxId success:^(AFHTTPRequestOperation *operation, id response) {
-        NSLog(@"%@", response);
+        //NSLog(@"%@", response);
         NSArray * newTweets = [Tweet tweetsWithArray:response];
         [self.tweets addObjectsFromArray:newTweets];
         self.maxId = [self.tweets[self.tweets.count - 1] tweetId];
