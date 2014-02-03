@@ -45,6 +45,8 @@
 - (void)updateRetweetButton:(BOOL)retweet andLabel:(BOOL)updateLabel;
 - (IBAction)tapReply:(id)sender;
 
+@property NSNumber *retweetId; // only if this is the original tweet and you retweeted it.
+
 @end
 
 @implementation TweetViewController
@@ -112,7 +114,15 @@
     [self updateRetweetButton:!self.tweet.retweet andLabel:YES];
     
     if (self.tweet.retweet) {
-        [[TwitterClient instance] retweet:[self.tweet tweetId]];
+        __weak id weakSelf = self;
+        
+        [[TwitterClient instance] retweet:[self.tweet tweetId] success:^(NSNumber *retweetId) {
+            ((TweetViewController *)weakSelf).retweetId = retweetId;
+        }];
+    } else {
+        if (self.retweetId != nil) {
+            [[TwitterClient instance] deleteTweet:self.retweetId];
+        }
     }
 }
 

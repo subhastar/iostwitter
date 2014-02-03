@@ -88,7 +88,7 @@ static NSString * const kAccessTokenKey = @"kAccessTokenKey";
     }];
 }
 
-- (void) retweet:(NSNumber *)tweetId
+- (void) retweet:(NSNumber *)tweetId success:(void(^)(NSNumber * retweetId))successHandler
 {
     NSMutableDictionary *params = [NSMutableDictionary
                                    dictionary];
@@ -98,10 +98,22 @@ static NSString * const kAccessTokenKey = @"kAccessTokenKey";
     
     [self postPath:postPath parameters:params
         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"retweet success.");
+            successHandler([responseObject objectForKey:@"id"]);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"retweet failure %@", error);
     }];
+}
+
+- (void) deleteTweet:(NSNumber *)tweetId
+{
+    NSString *postPath = [NSString stringWithFormat:@"1.1/statuses/destroy/%@.json", tweetId];
+    
+    [self postPath:postPath parameters:nil
+           success:^(AFHTTPRequestOperation *operation, id responseObject) {
+               NSLog(@"delete success.");
+           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+               NSLog(@"delete failure %@", error);
+           }];
 }
 
 #pragma mark - Private methods
