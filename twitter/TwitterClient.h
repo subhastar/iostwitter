@@ -22,7 +22,7 @@
 
 - (void)homeTimelineWithCount:(int)count sinceId:(int)sinceId maxId:(long long)maxId success:(void (^)(AFHTTPRequestOperation *operation, id response))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
-- (void)postTweet:(NSString *)tweet success:(void (^)(id responseObject)) successHandler;
+- (void)postTweet:(NSString *)tweet replyId:(NSNumber *)replyId success:(void (^)(id responseObject)) successHandler;
 
 - (void)retweet:(NSNumber *)tweetId success:(void (^)(NSNumber * retweetId))successHandler;
 

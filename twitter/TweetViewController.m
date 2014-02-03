@@ -156,6 +156,7 @@
 - (IBAction)tapReply:(id)sender {
     ComposeViewController *composeVC = [[ComposeViewController alloc] init];
     composeVC.replyText = self.tweet.username;
+    composeVC.replyId = self.tweet.tweetId;
     
     [self.navigationController pushViewController:composeVC animated:YES];
 }

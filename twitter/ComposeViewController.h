@@ -11,5 +11,6 @@
 
 @interface ComposeViewController : UIViewController
 @property (nonatomic, strong) NSString *replyText;
+@property (nonatomic, strong) NSNumber *replyId;
 @property id<TweetPostDelegate> delegate;
 @end

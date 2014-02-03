@@ -44,7 +44,8 @@
 
 - (IBAction)tweet:(id)sender {
     __weak id<TweetPostDelegate> weakDelegate = self.delegate;
-    [[TwitterClient instance] postTweet:self.tweetTextView.text success:^ (id responseObject) {
+    
+    [[TwitterClient instance] postTweet:self.tweetTextView.text replyId:self.replyId success:^ (id responseObject) {
         Tweet *tweet = [[Tweet alloc] initWithDictionary:responseObject];
         [weakDelegate postedTweet:tweet];
     }];
