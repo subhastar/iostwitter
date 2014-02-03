@@ -126,7 +126,9 @@ NSLocalizedStringFromTableInBundle(key, @"NSDateTimeAgo", [NSBundle bundleWithPa
 }
 
 - (NSString *)username {
-    return [[self.data valueOrNilForKeyPath:@"user"] valueOrNilForKeyPath:@"screen_name"];
+    NSString *username = [[self.data valueOrNilForKeyPath:@"user"] valueOrNilForKeyPath:@"screen_name"];
+    return [NSString stringWithFormat:@"%@%@",
+            @"@", username];
 }
 
 - (NSString *)timestamp {
