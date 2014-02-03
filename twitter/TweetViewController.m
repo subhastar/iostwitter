@@ -7,8 +7,14 @@
 //
 
 #import "TweetViewController.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface TweetViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
+@property (weak, nonatomic) IBOutlet UITextView *tweetTextLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *profilePicView;
 
 @end
 
@@ -28,8 +34,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    NSLog(@"inside view did load.");
     // populate labels and stuff here.
+    self.nameLabel.text = self.tweet.name;
+    self.usernameLabel.text = self.tweet.username;
+    self.timestampLabel.text = self.tweet.timestamp;
+    self.tweetTextLabel.text = self.tweet.text;
+    
+    [self.profilePicView setImageWithURL:self.tweet.profilePicUrl];
 }
 
 - (void)didReceiveMemoryWarning
