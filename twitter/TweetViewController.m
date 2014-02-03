@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
 @property (weak, nonatomic) IBOutlet UITextView *tweetTextLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *profilePicView;
+@property (weak, nonatomic) IBOutlet UILabel *retweetsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *favoritesLabel;
 
 @end
 
@@ -39,6 +41,8 @@
     self.usernameLabel.text = self.tweet.username;
     self.timestampLabel.text = self.tweet.timestamp;
     self.tweetTextLabel.text = self.tweet.text;
+    self.retweetsLabel.text = [NSString stringWithFormat:@"%@", self.tweet.retweetCount];
+    self.favoritesLabel.text = [NSString stringWithFormat:@"%@", self.tweet.favoriteCount];
     
     [self.profilePicView setImageWithURL:self.tweet.profilePicUrl];
 }

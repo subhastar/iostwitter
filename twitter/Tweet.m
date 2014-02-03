@@ -150,6 +150,13 @@ NSLocalizedStringFromTableInBundle(key, @"NSDateTimeAgo", [NSBundle bundleWithPa
     return [self.data valueOrNilForKeyPath:@"id"];
 }
 
+- (NSNumber *) favoriteCount {
+    return [self.data valueOrNilForKeyPath:@"favorite_count"];
+}
+
+- (NSNumber *) retweetCount {
+    return [self.data valueOrNilForKeyPath:@"retweet_count"];
+}
 + (NSMutableArray *)tweetsWithArray:(NSArray *)array {
     NSMutableArray *tweets = [[NSMutableArray alloc] initWithCapacity:array.count];
     for (NSDictionary *params in array) {
