@@ -10,6 +10,7 @@
 
 @interface ComposeViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *tweetTextView;
+- (IBAction)tweet:(id)sender;
 
 @end
 
@@ -40,4 +41,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)tweet:(id)sender {
+    [[TwitterClient instance] postTweet:self.tweetTextView.text];
+}
 @end
