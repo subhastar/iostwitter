@@ -88,6 +88,22 @@ static NSString * const kAccessTokenKey = @"kAccessTokenKey";
     }];
 }
 
+- (void) retweet:(NSNumber *)tweetId
+{
+    NSMutableDictionary *params = [NSMutableDictionary
+                                   dictionary];
+    [params setObject:tweetId forKey:@"id"];
+    
+    NSString *postPath = [NSString stringWithFormat:@"1.1/statuses/retweet/%@.json", tweetId];
+    
+    [self postPath:postPath parameters:params
+        success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"retweet success.");
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"retweet failure %@", error);
+    }];
+}
+
 #pragma mark - Private methods
 
 - (void)setAccessToken:(AFOAuth1Token *)accessToken {

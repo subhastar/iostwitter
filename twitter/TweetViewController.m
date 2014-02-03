@@ -110,6 +110,10 @@
 }
 - (IBAction)tapRetweet:(id)sender {
     [self updateRetweetButton:!self.tweet.retweet andLabel:YES];
+    
+    if (self.tweet.retweet) {
+        [[TwitterClient instance] retweet:[self.tweet tweetId]];
+    }
 }
 
 - (void)updateRetweetButton:(BOOL)retweet andLabel:(BOOL)updateLabel {

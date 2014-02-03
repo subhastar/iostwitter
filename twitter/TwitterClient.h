@@ -24,4 +24,6 @@
 
 - (void)postTweet:(NSString *)tweet success:(void (^)(id responseObject)) successHandler;
 
+- (void)retweet:(NSNumber *)tweetId;
+
 @end
